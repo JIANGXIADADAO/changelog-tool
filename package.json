@@ -1,0 +1,34 @@
+{
+  "name": "@jiangxiadadao/changelog",
+  "version": "0.1.0",
+  "description": "AI-powered CHANGELOG generator from Git history. DeepSeek + OpenAI + Anthropic.",
+  "main": "lib/generator.js",
+  "bin": {
+    "changelog": "bin/changelog.js"
+  },
+  "scripts": {
+    "start": "node bin/changelog.js serve",
+    "test": "node --test src/tests/*.test.js"
+  },
+  "keywords": [
+    "changelog",
+    "release-notes",
+    "git",
+    "ai",
+    "deepseek",
+    "cli"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JIANGXIADADAO/changelog-tool"
+  },
+  "dependencies": {
+    "simple-git": "^3.27.0",
+    "@octokit/rest": "^21.0.0",
+    "openai": "^4.70.0",
+    "commander": "^12.1.0",
+    "express": "^4.21.0",
+    "express-session": "^1.18.0"
+  }
+}

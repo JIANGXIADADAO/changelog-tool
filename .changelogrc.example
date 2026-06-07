@@ -1,0 +1,29 @@
+{
+  "llm": {
+    "provider": "deepseek",
+    "deepseek": {
+      "apiKey": "sk-your-deepseek-key",
+      "model": "deepseek-chat",
+      "baseURL": "https://api.deepseek.com/v1"
+    },
+    "openai": {
+      "apiKey": "",
+      "model": "gpt-4o-mini"
+    },
+    "anthropic": {
+      "apiKey": "",
+      "model": "claude-sonnet-4-6"
+    }
+  },
+  "github": {
+    "token": "ghp_your-github-token"
+  },
+  "output": {
+    "format": "keepachangelog",
+    "file": "CHANGELOG.md"
+  },
+  "conventionalCommits": {
+    "enabled": true,
+    "enhanceWithAI": true
+  }
+}

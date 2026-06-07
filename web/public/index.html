@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHANGELOG — AI-powered release notes</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="topbar">
+    <a href="/" class="logo">CHANGELOG</a>
+    <div class="topbar-right">
+      <span id="user-info"></span>
+      <button id="login-btn" class="btn btn-small" onclick="login()">Connect GitHub</button>
+      <button id="logout-btn" class="btn btn-small btn-ghost" style="display:none" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <main id="app">
+    <!-- Dashboard View -->
+    <div id="view-dashboard" class="view">
+      <div class="hero">
+        <h1>Generate beautiful CHANGELOGs</h1>
+        <p>Connect a GitHub repository. Click generate. Your release notes are ready — categorized, summarized, and linked to every PR.</p>
+      </div>
+      <div id="repo-grid" class="repo-grid"></div>
+      <div id="empty-repos" class="empty-state" style="display:none">
+        <p>No repositories connected yet.</p>
+        <button class="btn btn-primary" onclick="login()">Connect GitHub</button>
+      </div>
+    </div>
+
+    <!-- Generate View -->
+    <div id="view-generate" class="view" style="display:none">
+      <div class="breadcrumb">
+        <a href="#" onclick="showDashboard()">← Back to repositories</a>
+        <span id="generate-repo-name" class="breadcrumb-repo"></span>
+      </div>
+      <div class="generate-panel">
+        <div class="range-selector">
+          <label>From tag</label>
+          <input type="text" id="from-tag" placeholder="e.g., v1.2.0" class="input">
+          <label>To</label>
+          <input type="text" id="to-tag" placeholder="HEAD" value="HEAD" class="input">
+          <button class="btn btn-primary" onclick="doGenerate()">Generate</button>
+        </div>
+
+        <div id="generate-loading" class="loading" style="display:none">
+          <div class="spinner"></div>
+          <p>Scanning PRs and generating changelog...</p>
+        </div>
+
+        <div id="generate-result" style="display:none">
+          <div class="preview-toolbar">
+            <span id="generate-stats"></span>
+            <div>
+              <label class="checkbox-label"><input type="checkbox" id="draft-checkbox"> Create as draft</label>
+              <button class="btn btn-primary" onclick="doPublish()">Publish to GitHub</button>
+            </div>
+          </div>
+          <div id="preview-content" class="preview-content" contenteditable="true"></div>
+        </div>
+
+        <div id="generate-error" class="error-state" style="display:none"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
