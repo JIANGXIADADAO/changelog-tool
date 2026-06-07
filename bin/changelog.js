@@ -38,8 +38,14 @@ program.command('generate')
         if (fromTag) {
           console.log(`Auto-detected latest tag: ${fromTag}`);
         } else {
-          console.error('No tags found. Use --from <tag> to specify a starting point, or run `changelog init` first.');
-          process.exit(1);
+          // No tags — fall back to first commit
+          fromTag = await git.getFirstCommit();
+          if (fromTag) {
+            console.log(`No tags found. Using first commit: ${fromTag.substring(0, 7)}`);
+          } else {
+            console.error('No git history found in this directory.');
+            process.exit(1);
+          }
         }
       }
 
