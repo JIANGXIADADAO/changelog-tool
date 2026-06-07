@@ -11,7 +11,7 @@ const program = new Command();
 program
   .name('changelog')
   .description('AI-powered CHANGELOG generator — DeepSeek + OpenAI + Anthropic')
-  .version('0.1.0');
+  .version(require('../package.json').version);
 
 // changelog init
 program.command('init')
