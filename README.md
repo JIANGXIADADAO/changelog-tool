@@ -11,11 +11,11 @@ CHANGELOG replaces that 30-60 minutes with **3 seconds**.
 ## Features
 
 - **AI-Powered Classification** — DeepSeek (default), OpenAI, or Anthropic. PRs categorized into Added/Changed/Fixed/Removed
+- **No AI? No Problem** — `--no-ai` uses smart keyword detection (e.g. "Add login" → Added, "Fix crash" → Fixed). Works with zero config
 - **Dual Interface** — CLI for quick generation, Web Dashboard for visual preview and editing
 - **One-Click Publish** — Push directly to GitHub Releases
 - **Smart Fallback** — AI fails? Falls back to rule-based classification. No crash, no blank output
-- **Zero Config Start** — `changelog init && changelog generate` and you have a preview
-- **Conventional Commits Compatible** — Works with or without CC; AI enhances existing CC workflows
+- **Conventional Commits Compatible** — `feat:`/`fix:` prefixes recognized; AI enhances existing CC workflows
 
 ## Quick Start
 
@@ -23,15 +23,16 @@ CHANGELOG replaces that 30-60 minutes with **3 seconds**.
 # Install
 npm install -g @jiangxiadadao/changelog
 
-# Configure (DeepSeek API key required for AI mode)
+# Quick try — no API key needed
+changelog generate --no-ai
+
+# Full power with AI (DeepSeek, ¥1/1M tokens)
 changelog init
 changelog config set llm.deepseek.apiKey sk-your-key
-
-# Generate (from latest tag to HEAD)
 changelog generate
 
-# Or with explicit range
-changelog generate --from v1.2.0 --to HEAD
+# Or with explicit range + GitHub PR data
+changelog generate --from v1.2.0 --to HEAD --owner you --repo your-project
 
 # Start Web Dashboard
 changelog serve
@@ -60,9 +61,10 @@ changelog serve
 
 | Plan | Price | Includes |
 |------|-------|----------|
-| **Free** | ¥0/month | Public repos, 3 generations/month, CLI only |
-| **Standard** | ¥30/month | Unlimited generations, Web Dashboard, auto-publish |
-| **Team** | ¥80/month | Private repos, multi-repo, custom templates, team access |
+| **Free** | ¥0/month | CLI: generate / publish / status / config. Unlimited repos, unlimited generations |
+| **Pro** | ¥5/month | Everything in Free + Web Dashboard (visual preview, OAuth login, repo management) |
+
+> All features work without a credit card. The Free tier is fully functional — no artificial limits on generations or repos.
 
 ## Requirements
 
@@ -73,6 +75,5 @@ changelog serve
 
 ## Links
 
-- [Full CLI Reference](./cli-reference.md) — 7 个命令的完整手册
-- [Web Dashboard + Configuration Guide](./quickstart.md) — OAuth 登录、预览面板、配置详解
-- [CHANGELOG Examples](./examples.md) — AI 生成 vs 规则分类效果对比
+- [GitHub Repository](https://github.com/JIANGXIADADAO/changelog-tool) — source code, issues, releases
+- [npm Package](https://www.npmjs.com/package/@jiangxiadadao/changelog)
