@@ -32,7 +32,7 @@ changelog config set llm.deepseek.apiKey sk-your-key
 changelog generate
 
 # Or with explicit range + GitHub PR data
-changelog generate --from v1.2.0 --to HEAD --owner you --repo your-project
+changelog generate --from v1.0.0 --to HEAD --owner you --repo your-project
 
 # Start Web Dashboard
 changelog serve
