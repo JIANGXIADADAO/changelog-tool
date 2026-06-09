@@ -161,7 +161,14 @@ program.command('status')
 
     try {
       const tags = await git.getTags();
-      console.log(`Tags found: ${tags.length > 0 ? tags.slice(0, 5).join(', ') + (tags.length > 5 ? '...' : '') : 'none'}`);
+      if (tags.length > 0) {
+        console.log(`Tags found: ${tags.slice(0, 5).join(', ')}${tags.length > 5 ? '...' : ''}`);
+      } else {
+        console.log('Tags found: none');
+        console.log('No tags found yet. Create your first tag:');
+        console.log('  git tag v1.0.0');
+        console.log('  git push origin v1.0.0');
+      }
     } catch (e) {
       console.log('Tags: (not a git repository or no tags)');
     }
@@ -183,7 +190,22 @@ configCmd.command('set <key> <value>')
     }
     target[keys[keys.length - 1]] = value;
     config.save(cfg);
-    console.log(`Set ${key} = ${value.substring(0, 8)}...`);
+
+    // Output the top-level section as JSON with masked sensitive values
+    const topKey = keys[0];
+    const output = JSON.parse(JSON.stringify({ [topKey]: cfg[topKey] }));
+    function maskSensitive(obj) {
+      if (!obj || typeof obj !== 'object') return;
+      for (const k of Object.keys(obj)) {
+        if (k.toLowerCase().includes('apikey') || k.toLowerCase().includes('token')) {
+          obj[k] = '***';
+        } else if (typeof obj[k] === 'object') {
+          maskSensitive(obj[k]);
+        }
+      }
+    }
+    maskSensitive(output);
+    console.log(JSON.stringify(output, null, 2));
   });
 
 configCmd.command('show')
